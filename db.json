@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "image": "bauer.jpg",
+      "name": "bauer",
+      "price": 35000,
+      "article": "T1",
+      "availabel": true
+    },
+    {
+      "image": "graf.png",
+      "name": "graf",
+      "price": 25000,
+      "article": "T2",
+      "availabel": true
+    },
+    {
+      "image": "x.jpg",
+      "name": "bauerX",
+      "price": 30000,
+      "article": "T3",
+      "availabel": false
+    },
+    {
+      "image": "ccm.jpg",
+      "name": "ccm",
+      "price": 20000,
+      "article": "T4",
+      "availabel": true
+    }
+  ]
+}
