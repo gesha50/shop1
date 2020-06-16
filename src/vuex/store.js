@@ -1,36 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import getters from "@/vuex/getters/getters";
+import commonActions from "@/vuex/actions/actions";
+import apiRequests from "./actions/api-requests"
+import mutations from "@/vuex/mutations/mutations";
+
+const actions = {...commonActions, ...apiRequests}
 
 Vue.use(Vuex);
 
 let store = new Vuex.Store({
     state: {
         products: [],
+        cart: [],
     },
-    mutations: {
-        SET_PRODUCTS: (state, products) => {
-            state.products = products
-        }
-    },
-    actions: {
-        GET_PRODUCTS_FROM_API({commit}){
-            return axios('http://localhost:3000/products', {
-                method: "GET"
-            })
-                .then((products) => {
-                    commit('SET_PRODUCTS', products.data)
-                    return products
-                })
-                .catch((err) => {
-                   console.log(err)
-                    return err
-            })
-        },
-    },
-    getters: {
-        PRODUCTS(state){return state.products}
-    },
+    mutations,
+    actions,
+    getters,
 });
 
 export default store;

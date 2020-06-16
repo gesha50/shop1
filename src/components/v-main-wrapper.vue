@@ -1,41 +1,50 @@
 <template>
 
     <div class="v-main-wrapper">
-        <vCatalog></vCatalog>
-        <vCart></vCart>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+        <!--<vCatalog />
+        <vCart
+                v-if="CART.length"
+                :cart_data="CART "
+        />-->
     </div>
 
 </template>
 
 <script>
 
-    import vCatalog from './v-catalog'
-    import vCart from './v-cart'
+    //import vCatalog from './v-catalog'
+    //import vCart from './v-cart'
+    //import { mapGetters } from  'vuex'
 
     export default {
     name: 'v-main-wrapper',
-    components: {
+    /*components: {
         vCatalog,
         vCart,
-    },
+    },*/
     props:{},
     data() {
         return{
             title: 'Main wr'
         }
     },
-    computed: {},
+    computed: {
+        /*...mapGetters([
+            'CART',
+        ])*/
+    },
     methods: {},
     watch: {},
-    mounted() {
-        console.log('hellow i done')
-    },
+
 
     }
 </script>
 
 <style scoped>
-    .v-main-wrapper {
+    .v-main-wrapper   {
         max-width: 900px;
         margin: 0 auto;
     }

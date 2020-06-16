@@ -1,12 +1,15 @@
 <template>
     <div class="v-catalog">
+        <router-link :to="{name: 'cart', params: {cart_data: CART}}">
+            <div class="v-catalog__link_to_cart">CART: {{CART.length}}</div>
+        </router-link>
         <h1>Catalog</h1>
         <div class="v-catalog__list">
             <vCatalogItem
             v-for="product in PRODUCTS"
             :key="product.article"
             :product_data="product"
-            @sendArticle="showChildArtToConsole"
+            @addToCart="addToCart"
             />
 
         </div>
@@ -28,15 +31,17 @@
         },
         computed: {
             ...mapGetters([
-                'PRODUCTS'
+                'PRODUCTS',
+                "CART",
             ])
         },
         methods: {
             ...mapActions([
-                'GET_PRODUCTS_FROM_API'
+                'GET_PRODUCTS_FROM_API',
+                'ADD_TO_CART',
             ]),
-            showChildArtToConsole(data){
-                console.log(data)
+            addToCart(data){
+                this.ADD_TO_CART(data)
             },
         },
         mounted() {
@@ -58,5 +63,12 @@
              justify-content: space-between;
              align-items: center;
          }
+        &__link_to_cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: $padding*2;
+            border: 1px solid #aeaeae;
+        }
     }
 </style>

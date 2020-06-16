@@ -1,9 +1,9 @@
 <template>
     <div class="v-catalog-item">
-        <img class="v-catalog-item__img" :src=" require('../img/' + product_data.image ) " alt="img">
+        <img class="v-catalog-item__img" :src=" require('../../img/' + product_data.image ) " alt="img">
         <p class="v-catalog-item__name">{{product_data.name}}</p>
         <p class="v-catalog-item__price">price: {{product_data.price}} p</p>
-        <button class="btn v-catalog-item__button" @click="sendDataToParent">add to cart</button>
+        <button class="btn v-catalog-item__button" @click="addToCart">add to cart</button>
     </div>
 </template>
 
@@ -20,10 +20,13 @@
             }
         },
         methods:{
-            sendDataToParent(){
-                this.$emit('sendArticle', this.product_data.article)
-            },
-        }
+            addToCart(){
+                this.$emit('addToCart',this.product_data)
+            }
+        },
+        mounted(){
+
+        },
     }
 </script>
 
