@@ -6,8 +6,9 @@
         >{{selected}}</p>
         <div
                 class="options"
-            v-if="areOptionsVisible || isExpended"
-        >
+
+            v-if="areOptionsVisible"
+        ><!-- можно добавить эту опцию для постоянного открытия|| isExpended-->
             <p
                 v-for="option in options"
                 :key="option.value"
