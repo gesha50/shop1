@@ -1,6 +1,8 @@
 <template>
     <div class="v-catalog">
-        <p>Selected option:{{selected}}</p>
+        <v-notification
+                :messages="messages"
+        />
         <router-link :to="{name: 'cart', params: {cart_data: CART}}">
             <div class="v-catalog__link_to_cart">CART: {{CART.length}}</div>
         </router-link>
@@ -10,7 +12,6 @@
                     :options="categories"
                     @select="sortByCategories"
                     :selected="selected"
-                    :is-expended="IS_DESKTOP"
             />
             <div class="range-slider">
                 <input type="range" min="0" max="50000" step="100" v-model.number="minPrice" @change="setRangeSlider">
@@ -28,6 +29,7 @@
             :key="product.article"
             :product_data="product"
             @addToCart="addToCart"
+            @productClick="productClick"
             />
 
         </div>
@@ -38,11 +40,15 @@
     import vCatalogItem from './v-catalog-item'
     import vSelect from './v-select'
     import { mapActions,mapGetters } from 'vuex'
+    import vNotification from '../notifications/v-notification'
+
+
     export default {
         name: "v-catalog",
         components:{
             vCatalogItem,
             vSelect,
+            vNotification,
         },
         data() {
             return {
@@ -55,6 +61,7 @@
                 sortedProducts: [],
                 minPrice: 0,
                 maxPrice: 50000,
+                messages: [],
             }
         },
         computed: {
@@ -63,6 +70,7 @@
                 "CART",
                 'IS_MOBILE',
                 'IS_DESKTOP',
+                'SEARCH_VALUE',
             ]),
             filteredProducts(){
                 if(this.sortedProducts.length){
@@ -77,8 +85,21 @@
                 'GET_PRODUCTS_FROM_API',
                 'ADD_TO_CART',
             ]),
+            productClick(article) {
+                this.$router.push( {name: 'product', query: { 'product': article }})
+            },
             addToCart(data){
                 this.ADD_TO_CART(data)
+            },
+            sortProductsBySearchValue(value) {
+                this.sortedProducts = [...this.PRODUCTS]
+                if (value) {
+                    this.sortedProducts = this.sortedProducts.filter(function (item) {
+                        return item.name.toLowerCase().includes(value.toLowerCase())
+                    })
+                } else {
+                    this.sortedProducts = this.PRODUCTS;
+                }
             },
             sortByCategories(category){
                 let vm = this
@@ -91,17 +112,8 @@
                         vm.selected === category.name
                         return e.category === category.name
                     })
+                    this.selected = category.name
                 }
-                this.selected = category.name
-
-                /*this.sortedProducts = []
-                let vm = this
-                this.PRODUCTS.map(function (item) {
-                    if (item.category === category.name){
-                        vm.sortedProducts.push(item)
-                    }
-                })
-                this.selected = category.name*/
             },
             setRangeSlider(){
               if(this.minPrice > this.maxPrice){
@@ -112,12 +124,17 @@
                 this.sortByCategories()
             },
         },
+        watch:{
+          SEARCH_VALUE() {
+              this.sortProductsBySearchValue(this.SEARCH_VALUE)
+          }
+        },
         mounted() {
             this.GET_PRODUCTS_FROM_API()
             .then((res) => {
                 if(res.data) {
-                    console.log('Data arrived')
                     this.sortByCategories()
+                    this.sortProductsBySearchValue(this.SEARCH_VALUE)
                 }
             })
 
@@ -135,7 +152,7 @@
          }
         &__link_to_cart {
             position: absolute;
-            top: 10px;
+            top: 90px;
             right: 10px;
             padding: $padding*2;
             border: 1px solid #aeaeae;

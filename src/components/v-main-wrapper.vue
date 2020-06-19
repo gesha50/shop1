@@ -1,6 +1,7 @@
 <template>
 
     <div class="v-main-wrapper">
+        <v-header />
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
@@ -14,7 +15,7 @@
 </template>
 
 <script>
-
+    import vHeader from './layouts/v-header'
     //import vCatalog from './v-catalog'
     //import vCart from './v-cart'
     //import { mapGetters } from  'vuex'
@@ -22,10 +23,11 @@
 
     export default {
     name: 'v-main-wrapper',
-    /*components: {
-        vCatalog,
-        vCart,
-    },*/
+    components: {
+        vHeader,
+        //vCatalog,
+        //vCart,
+    },
     props:{},
     data() {
         return{
@@ -46,7 +48,6 @@
 
 <style scoped>
     .v-main-wrapper   {
-        max-width: 900px;
         margin: 0 auto;
     }
 </style>
