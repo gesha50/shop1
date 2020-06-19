@@ -11,7 +11,7 @@
             <img class="v-catalog-item__img" :src=" require('../../img/' + product_data.image ) " alt="img">
             <div>
                 <p class="v-catalog-item__name">{{product_data.name}}</p>
-                <p class="v-catalog-item__price">price: {{product_data.price}} p</p>
+                <p class="v-catalog-item__price">price: {{product_data.price | toFix | formattedPrice}}</p>
                 <p class="v-catalog-item__price">price: {{product_data.category}}</p>
             </div>
 
@@ -19,7 +19,7 @@
 
         <img class="v-catalog-item__img" :src=" require('../../img/' + product_data.image ) " alt="img">
         <p class="v-catalog-item__name">{{product_data.name}}</p>
-        <p class="v-catalog-item__price">price: {{product_data.price}} p</p>
+        <p class="v-catalog-item__price">price: {{product_data.price | toFix | formattedPrice}}</p>
         <div class="v-catalog-item-for-btn">
             <button class="v-catalog-item__show-info" @click="showPopupInfo">show info</button>
             <button class="btn v-catalog-item__button" @click="addToCart">add to cart</button>
@@ -30,6 +30,8 @@
 <script>
 
     import vPopup from '../popup/v-popup'
+    import toFix from "@/filters/toFix";
+    import formattedPrice from "@/filters/price-format";
 
     export default {
         data(){
@@ -48,6 +50,10 @@
                     return {}
                 }
             }
+        },
+        filters:{
+          toFix,
+          formattedPrice,
         },
         methods:{
             showPopupInfo(){

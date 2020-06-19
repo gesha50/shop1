@@ -3,7 +3,7 @@
     {
       "image": "bauer.jpg",
       "name": "bauer",
-      "price": 35000,
+      "price": 35000.464878,
       "article": "T1",
       "availabel": true,
       "category": "мужские"
@@ -11,7 +11,7 @@
     {
       "image": "graf.png",
       "name": "graf",
-      "price": 25000,
+      "price": 25000.454647,
       "article": "T2",
       "availabel": true,
       "category": "мужские"
@@ -19,7 +19,7 @@
     {
       "image": "x.jpg",
       "name": "bauerX",
-      "price": 30000,
+      "price": 30000.4884,
       "article": "T3",
       "availabel": false,
       "category": "женские"
@@ -27,7 +27,7 @@
     {
       "image": "ccm.jpg",
       "name": "ccm",
-      "price": 20000,
+      "price": 20000.487847,
       "article": "T4",
       "availabel": true,
       "category": "мужские"
