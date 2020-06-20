@@ -17,7 +17,7 @@
 
         </v-popup>
 
-        <img class="v-catalog-item__img" :src=" require('../../img/' + product_data.image ) " alt="img">
+        <img class="v-catalog-item__img" :src=" require('../../img/' + product_data.image ) " alt="img" @click="productClick">
         <p class="v-catalog-item__name">{{product_data.name}}</p>
         <p class="v-catalog-item__price">price: {{product_data.price | toFix | formattedPrice}}</p>
         <div class="v-catalog-item-for-btn">
@@ -56,6 +56,9 @@
           formattedPrice,
         },
         methods:{
+            productClick(){
+              this.$emit('productClick',this.product_data.article)
+            },
             showPopupInfo(){
                 this.isInfoPopupVisible = true
             },
@@ -80,6 +83,7 @@
         margin-bottom: $margin*2;
         &__img {
             width: 150px;
+            cursor: pointer;
         }
         .v-catalog-item-for-btn{
             display: flex;

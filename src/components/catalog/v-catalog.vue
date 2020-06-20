@@ -86,10 +86,17 @@
                 'ADD_TO_CART',
             ]),
             productClick(article) {
+                console.log(article)
                 this.$router.push( {name: 'product', query: { 'product': article }})
             },
             addToCart(data){
                 this.ADD_TO_CART(data)
+                .then(()=>{
+                    let timeStamp = Date.now().toLocaleString()
+                    this.messages.unshift(
+                        { name: 'Товар добавлен в Корзину!', icon: 'check_circle', id: timeStamp}
+                    )
+                })
             },
             sortProductsBySearchValue(value) {
                 this.sortedProducts = [...this.PRODUCTS]
