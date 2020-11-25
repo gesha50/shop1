@@ -16,6 +16,7 @@
 
 <script>
     import vHeader from './layouts/v-header'
+    //import vMainPage from './main-page/v-main-page'
     //import vCatalog from './v-catalog'
     //import vCart from './v-cart'
     //import { mapGetters } from  'vuex'
@@ -25,6 +26,7 @@
     name: 'v-main-wrapper',
     components: {
         vHeader,
+        //vMainPage,
         //vCatalog,
         //vCart,
     },

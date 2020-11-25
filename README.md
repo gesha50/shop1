@@ -1,3 +1,7 @@
+
+/* нужно выполить такую команду чтоб файлы заработали
+json-server --watch db.json */
+
 # new1
 
 ## Project setup
